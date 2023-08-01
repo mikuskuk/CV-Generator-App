@@ -1,0 +1,43 @@
+"use client";
+import React, { useState } from "react";
+import { CVData, Education, WorkExperience, Skills } from "./types/types";
+import { CVForm } from "./components/CVForm"
+import { CVPreview } from "./components/CVPreview";
+
+export default function Home() {
+  const [cvData, setCVData] = useState<CVData>({
+    name: '',
+    surname: '',
+    education: [] as Education[],
+    workExperience: [] as WorkExperience[],
+    phone: '',
+    email: '',
+    skills: [] as Skills[],
+    interests: '',
+    github: '',
+    linkedin: '',
+  });
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center py-6 sm:px-6 lg:px-8">
+      <div className="max-w-full w-full space-y-8 lg:flex lg:space-y-0 lg:space-x-8">
+        <div className="w-full">
+          <div className="flex items-center justify-center">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              CV Information
+            </h2>
+          </div>
+          <CVForm cvData={cvData} setCVData={setCVData} />
+        </div>
+        <div className="w-full">
+          <div className="flex items-center justify-center">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              CV Generation
+            </h2>
+          </div>
+          <CVPreview cvData={cvData} />
+        </div>
+      </div>
+    </div>
+  );
+}

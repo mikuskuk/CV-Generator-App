@@ -1,11 +1,14 @@
 import React, { ChangeEvent } from 'react';
-import { CVData, Education, WorkExperience, Skills } from '../types/types';
+import { CVData, Education, WorkExperience } from '../types/types';
+import { Input, Button, Space } from 'antd';
 import { BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
 
 interface CVFormProps {
   cvData: CVData;
   setCVData: React.Dispatch<React.SetStateAction<CVData>>;
 }
+
+const { TextArea } = Input;
 
 export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +19,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
   const handleAddEducation = () => {
     setCVData((prevData) => ({
       ...prevData,
-      education: [...prevData.education, { school: '', degree: '', dates: '' }],
+      education: [...prevData.education, { school: '', degree: '', dates: '', addinfo: '' }],
     }));
   };
 
@@ -31,7 +34,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
   const handleAddWorkExperience = () => {
     setCVData((prevData) => ({
       ...prevData,
-      workExperience: [...prevData.workExperience, { company: '', role: '', dates: '' }],
+      workExperience: [...prevData.workExperience, { company: '', role: '', dates: '', description: '' }],
     }));
   };
 
@@ -90,7 +93,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold flex items-center"><IdcardOutlined className="mr-2"/>Information</h2>
-        <input
+        <Input
             type="text"
             name="name"
             value={cvData.name || ''}
@@ -98,7 +101,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
             placeholder="Name"
             className="input mr-4 w-1/3"
         />
-        <input
+        <Input
             type="text"
             name="surname"
             value={cvData.surname || ''}
@@ -107,7 +110,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
             className="input mr-4 w-1/3"
         />
         <div>
-            <input
+            <Input
                 type="text"
                 name="phone"
                 value={cvData.phone || ''}
@@ -115,7 +118,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Phone"
                 className="input mr-4 w-1/3"
             />
-            <input
+            <Input
                 type="text"
                 name="email"
                 value={cvData.email || ''}
@@ -124,13 +127,12 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 className="input mr-4 w-1/3"
             />
         </div>
-        
 
         
       <h2 className="text-xl font-semibold flex items-center"><BookOutlined className="mr-2"/>Education</h2>
         {cvData.education.map((edu, index) => (
             <div key={index} className="space-y-2">
-            <input
+            <Input
                 type="text"
                 name={`education[${index}].school`}
                 value={edu.school}
@@ -138,7 +140,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="School"
                 className="input mr-4 w-1/3"
             />
-            <input
+            <Input
                 type="text"
                 name={`education[${index}].degree`}
                 value={edu.degree}
@@ -146,7 +148,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Degree"
                 className="input mr-4 w-1/3"
             />
-            <input
+            <Input
                 type="text"
                 name={`education[${index}].dates`}
                 value={edu.dates}
@@ -154,25 +156,33 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Dates"
                 className="input mr-4 w-1/3"
             />
-            <button
+            <Input
+                type="text"
+                name={`education[${index}].addinfo`}
+                value={edu.addinfo}
+                onChange={(e) => handleEducationChange(index, 'addinfo', e.target.value)}
+                placeholder="Additional Information"
+                className="input mr-4 w-1/3"
+            />
+            <Button
                 className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 onClick={() => handleDeleteEducation(index)}
                 >
                 Delete Education
-            </button>
+            </Button>
             </div>
         ))}
-        <button
+        <Button
             className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={handleAddEducation}
             >
             Add Education
-        </button>
+        </Button>
     
       <h2 className="text-xl font-semibold flex items-center"><ToolOutlined className="mr-2"/>Work Experience</h2>
         {cvData.workExperience.map((work, index) => (
             <div key={index} className="space-y-2">
-            <input
+            <Input
                 type="text"
                 name={`workExperience[${index}].company`}
                 value={work.company}
@@ -180,7 +190,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Company"
                 className="input mr-4 w-1/3"
             />
-            <input
+            <Input
                 type="text"
                 name={`workExperience[${index}].role`}
                 value={work.role}
@@ -188,7 +198,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Role"
                 className="input mr-4 w-1/3"
             />
-            <input
+            <Input
                 type="text"
                 name={`workExperience[${index}].dates`}
                 value={work.dates}
@@ -196,25 +206,33 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Dates"
                 className="input mr-4 w-1/3"
             />
-            <button
+            <Input
+                type="text"
+                name={`workExperience[${index}].description`}
+                value={work.description}
+                onChange={(e) => handleWorkExperienceChange(index, 'description', e.target.value)}
+                placeholder="Job Description"
+                className="input mr-4 w-1/3"
+            />
+            <Button
                 className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 onClick={() => handleDeleteWorkExperience(index)}
                 >
                 Delete Work Experience
-            </button>
+            </Button>
             </div>
         ))}
-        <button
+        <Button
             className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={handleAddWorkExperience}
         >
             Add Work Experience
-        </button>
+        </Button>
 
       <h2 className="text-xl font-semibold flex items-center"><SettingOutlined className="mr-2"/>Skills</h2>
         {cvData.skills.map((skill, index) => (
             <div key={index} className="space-y-2">
-            <input
+            <Input
                 type="text"
                 name={`skills[${index}].skill`}
                 value={skill.skill}
@@ -222,23 +240,23 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
                 placeholder="Skill"
                 className="input mr-4 w-1/3"
             />
-            <button
+            <Button
                 className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 onClick={() => handleDeleteSkill(index)}
             >
                 Delete Skill
-            </button>
+            </Button>
             </div>
         ))}
-        <button
+        <Button
             className="mt-1 inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-small text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={handleAddSkill}
         >
             Add Skill
-        </button>
+        </Button>
 
       <h2 className="text-xl font-semibold flex items-center"><LaptopOutlined className="mr-2"/>Social Media</h2>
-        <input
+        <Input
             type="text"
             name="github"
             value={cvData.github || ''}
@@ -246,7 +264,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
             placeholder="GitHub Profile"
             className="input mr-4 w-1/3"
         />
-        <input
+        <Input
             type="text"
             name="linkedin"
             value={cvData.linkedin || ''}
@@ -256,7 +274,7 @@ export const CVForm: React.FC<CVFormProps> = ({ cvData, setCVData }) => {
         />
       
       <h2 className="text-xl font-semibold flex items-center"><PaperClipOutlined className="mr-2"/>Interests</h2>
-        <textarea
+        <TextArea
             name="interests"
             value={cvData.interests || ''}
             onChange={handleInterestChange}

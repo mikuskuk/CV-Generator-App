@@ -57,6 +57,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
               <p className="mb-1 flex items-center"><BookOutlined className="mr-1"/>School: {edu.school}</p>
               <p className="mb-1 ml-8">Degree: {edu.degree}</p>
               <p className="mb-1 ml-8">Dates: {edu.dates}</p>
+              <p className="mb-1 ml-8">Additional Infromation: {edu.addinfo}</p>
             </div>
           ))}
 
@@ -66,6 +67,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
               <p className="mb-1 flex items-center"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
               <p className="mb-1 ml-8">Role: {work.role}</p>
               <p className="mb-1 ml-8">Dates: {work.dates}</p>
+              <p className="mb-1 ml-8">Job Description: {work.description}</p>
             </div>
           ))}
 

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CVData } from '../types/types';
 import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
 
+const [darkMode, setDarkMode] = useState<boolean>(false);
+
 interface CVPreviewProps {
   cvData: CVData;
 }
@@ -52,7 +54,9 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
   return (
     <div className="mt-8 space-y-6">
       <div className="rounded-md shadow-sm p-4">
-        <div ref={cvPreviewRef} id="cv-preview" className={`rounded-md shadow-md bg-white p-8 w-210mm h-297mm`} style={{ fontFamily: selectedFont }}>
+        <div ref={cvPreviewRef} id="cv-preview" className={`rounded-md shadow-md bg-white p-8 w-210mm h-297mm ${
+          darkMode ? 'text-black' : `text-${selectedColor}-600`
+          }`} style={{ fontFamily: selectedFont }}>
           
           <h1 className="text-3xl font-bold mb-2" style={{ color: selectedColor }}>
             {cvData.name} {cvData.surname}
@@ -65,20 +69,24 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
           <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Education</h2>
           {cvData.education.map((edu, index) => (
             <div key={index}>
-              <p className="mb-1 flex items-center"><BookOutlined className="mr-1"/>School: {edu.school}</p>
-              <p className="mb-1 ml-8">Degree: {edu.degree}</p>
-              <p className="mb-1 ml-8">Dates: {edu.dates}</p>
-              <p className="mb-1 ml-8">Additional Infromation: {edu.addinfo}</p>
+              <p className="mb-1 flex items-center font-bold"><BookOutlined className="mr-1"/>School: {edu.school}</p>
+              <ul className="list-disc ml-8">
+                <li className="mb-1 ml-8">Degree: {edu.degree}</li>
+                <li className="mb-1 ml-8">Dates: {edu.dates}</li>
+                <li className="mb-1 ml-8">Additional Information: {edu.addinfo}</li>
+              </ul>
             </div>
           ))}
 
           <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Work Experience</h2>
           {cvData.workExperience.map((work, index) => (
             <div key={index}>
-              <p className="mb-1 flex items-center"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
-              <p className="mb-1 ml-8">Role: {work.role}</p>
-              <p className="mb-1 ml-8">Dates: {work.dates}</p>
-              <p className="mb-1 ml-8">Job Description: {work.description}</p>
+              <p className="mb-1 flex items-center font-bold"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
+              <ul className="list-disc ml-8">
+                <li className="mb-1 ml-8"> Role: {work.role}</li>
+                <li className="mb-1 ml-8"> Dates: {work.role}</li>
+                <li className="mb-1 ml-8"> Job Description: {work.role}</li>
+              </ul>
             </div>
           ))}
 

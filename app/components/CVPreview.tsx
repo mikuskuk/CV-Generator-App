@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import html2pdf from 'html2pdf.js';
 import { CVData } from '../types/types';
+
 import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
 
 interface CVPreviewProps {
@@ -21,17 +21,25 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
   };
 
   const handleGeneratePDF = () => {
-    const element = cvPreviewRef.current;
-    const opt = {
-      margin: 10,
-      filename: 'cv.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, removeContainer: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    };
+    if (typeof window !== 'undefined') {
+      import('html2pdf.js').then((html2pdf) => {
+        const element = cvPreviewRef.current;
+        const opt = {
+          margin: 10,
+          filename: 'cv.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, removeContainer: true },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        };
 
-    if (element) {
-      html2pdf().from(element).set(opt).save();
+        if (element) {
+          html2pdf().from(element).set(opt).save();
+        }
+      }).catch((error) => {
+        console.error('Failed to load html2pdf.js:', error);
+      });
+    } else {
+      console.error('html2pdf.js is not available in the server context.');
     }
   };
 

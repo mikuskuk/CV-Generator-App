@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CVData } from '../types/types';
-
 import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
 
 interface CVPreviewProps {
@@ -9,12 +8,16 @@ interface CVPreviewProps {
 
 export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
   const cvPreviewRef = useRef<HTMLDivElement>(null);
-  const [selectedColor, setSelectedColor] = useState<string>('indigo');
+  const [selectedColor, setSelectedColor] = useState<string>('blue');
   const [selectedFont, setSelectedFont] = useState<string>('sans-serif');
+
+  useEffect(() => {
+    setSelectedColor('blue');
+  }, []);
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
-  }
+  };
 
   const handleFontChange = (font: string) => {
     setSelectedFont(font);
@@ -43,7 +46,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
     }
   };
 
-  const colors = ['indigo', 'green', 'gray', 'purple', 'pink'];
+  const colors = ['blue', 'green', 'gray', 'purple', 'pink'];
   const fonts = ['sans-serif', 'serif', 'monospace', 'cursive', 'fantasy'];
 
   return (
@@ -51,15 +54,15 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
       <div className="rounded-md shadow-sm p-4">
         <div ref={cvPreviewRef} id="cv-preview" className={`rounded-md shadow-md bg-white p-8 w-210mm h-297mm`} style={{ fontFamily: selectedFont }}>
           
-          <h1 className={`text-3xl font-bold mb-2 text-${selectedColor}-600`}>
+          <h1 className="text-3xl font-bold mb-2" style={{ color: selectedColor }}>
             {cvData.name} {cvData.surname}
           </h1>
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Information</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Information</h2>
           <p className="mb-1 flex items-center"><PhoneOutlined className="mr-1"/>Phone: {cvData.phone}</p>
           <p className="mb-1 flex items-center"><MailOutlined className="mr-1"/>Email: {cvData.email}</p>
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Education</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Education</h2>
           {cvData.education.map((edu, index) => (
             <div key={index}>
               <p className="mb-1 flex items-center"><BookOutlined className="mr-1"/>School: {edu.school}</p>
@@ -69,7 +72,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </div>
           ))}
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Work Experience</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Work Experience</h2>
           {cvData.workExperience.map((work, index) => (
             <div key={index}>
               <p className="mb-1 flex items-center"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
@@ -79,7 +82,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </div>
           ))}
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Skills</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Skills</h2>
           <div>
             <p className="mb-1 flex items-center">
             <SettingOutlined className="mr-1"/>
@@ -92,11 +95,11 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </p>
           </div>
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Social Media</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Social Media</h2>
           <p className="mb-1 flex items-center"><GithubOutlined className="mr-1"/>GitHub: {cvData.github}</p>
           <p className="mb-1 flex items-center"><LinkedinOutlined className="mr-1"/>LinkedIn: {cvData.linkedin}</p>
 
-          <h2 className={`text-xl font-semibold border-b-2 border-${selectedColor}-600 pb-2 mb-4 mt-4`}>Interests</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Interests</h2>
           <p className="flex items-top"><PaperClipOutlined className="mr-1"/>{cvData.interests}</p>
         </div>
 

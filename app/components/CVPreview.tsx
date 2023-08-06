@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CVData } from '../types/types';
 import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
 
-const [darkMode, setDarkMode] = useState<boolean>(false);
-
 interface CVPreviewProps {
   cvData: CVData;
 }
@@ -54,9 +52,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
   return (
     <div className="mt-8 space-y-6">
       <div className="rounded-md shadow-sm p-4">
-        <div ref={cvPreviewRef} id="cv-preview" className={`rounded-md shadow-md bg-white p-8 w-210mm h-297mm ${
-          darkMode ? 'text-black' : `text-${selectedColor}-600`
-          }`} style={{ fontFamily: selectedFont }}>
+        <div ref={cvPreviewRef} id="cv-preview" className={`rounded-md shadow-md bg-white p-8 w-210mm h-297mm`} style={{ fontFamily: selectedFont }}>
           
           <h1 className="text-3xl font-bold mb-2" style={{ color: selectedColor }}>
             {cvData.name} {cvData.surname}

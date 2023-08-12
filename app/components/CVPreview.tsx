@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CVData } from '../types/types';
-import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined } from '@ant-design/icons';
+import { LinkedinOutlined, GithubOutlined, UserOutlined, MailOutlined, PhoneOutlined, BookOutlined, PaperClipOutlined, SettingOutlined, ToolOutlined, IdcardOutlined, LaptopOutlined, CommentOutlined, FundProjectionScreenOutlined } from '@ant-design/icons';
 
 interface CVPreviewProps {
   cvData: CVData;
@@ -86,6 +86,17 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </div>
           ))}
 
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Projects</h2>
+          <div>
+            {cvData.projects.map((project, index) => (
+              <div key={index}>
+                <p className="mb-1 flex items-center font-bold"><FundProjectionScreenOutlined className="mr-1"/>Project: {project.name}</p>
+                <p className="mb-1 ml-8">Description: {project.description}</p>
+              </div>
+            ))}
+          </div>
+
+
           <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Skills</h2>
           <div>
             <p className="mb-1 flex items-center">
@@ -97,6 +108,18 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
                 </React.Fragment>
               ))}
             </p>
+          </div>
+
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Languages</h2>
+          <div>
+            <ul className="list-disc">
+              {cvData.languages.map((language, index) => (
+                <li key={index} className="mb-1 flex items-center">
+                  <CommentOutlined className="mr-1"/>
+                  {language.language} | {language.level}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Social Media</h2>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { CVData, Education, WorkExperience, Skills } from "./types/types";
+import { CVData, Education, WorkExperience, Project, Skills, Languages } from "./types/types";
 import { CVForm } from "./components/CVForm"
 import { CVPreview } from "./components/CVPreview";
 
@@ -10,9 +10,11 @@ export default function Home() {
     surname: '',
     education: [] as Education[],
     workExperience: [] as WorkExperience[],
+    projects: [] as Project[],
     phone: '',
     email: '',
     skills: [] as Skills[],
+    languages: [] as Languages[],
     interests: '',
     github: '',
     linkedin: '',
@@ -23,7 +25,7 @@ export default function Home() {
       <div className="max-w-full w-full space-y-8 lg:flex lg:space-y-0 lg:space-x-8">
         <div className="w-full">
           <div className="flex items-center justify-center">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 mb-12 text-center text-3xl font-extrabold text-gray-900">
               CV Information
             </h2>
           </div>

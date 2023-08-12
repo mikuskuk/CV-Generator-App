@@ -12,8 +12,18 @@ export interface Education {
     description: string;
   }
 
+  export interface Project {
+    name: string;
+    description: string;
+  }
+
   export interface Skills {
     skill: string;
+  }
+
+  export interface Languages {
+    language: string;
+    level: string;
   }
   
   export interface CVData {
@@ -21,9 +31,11 @@ export interface Education {
     surname: string;
     education: Education[];
     workExperience: WorkExperience[];
+    projects: Project[];
     phone: string;
     email: string;
     skills: Skills[];
+    languages: Languages[];
     interests: string;
     github: string;
     linkedin: string;

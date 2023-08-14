@@ -62,48 +62,48 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             {cvData.name} {cvData.surname}
           </h1>
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Information</h2>
-          <p className="mb-1 flex items-center"><PhoneOutlined className="mr-1"/>Phone: {cvData.phone}</p>
-          <p className="mb-1 flex items-center"><MailOutlined className="mr-1"/>Email: {cvData.email}</p>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Information</h2>
+          <p className="mb-1 flex items-center text-black"><PhoneOutlined className="mr-1"/>Phone: {cvData.phone}</p>
+          <p className="mb-1 flex items-center text-black"><MailOutlined className="mr-1"/>Email: {cvData.email}</p>
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Education</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Education</h2>
           {cvData.education.map((edu, index) => (
             <div key={index}>
-              <p className="mb-1 flex items-center font-bold"><BookOutlined className="mr-1"/>School: {edu.school}</p>
+              <p className="mb-1 flex items-center font-bold text-black"><BookOutlined className="mr-1"/>School: {edu.school}</p>
               <ul className="list-disc ml-8">
-                <li className="mb-1 ml-8">Degree: {edu.degree}</li>
-                <li className="mb-1 ml-8">Dates: {edu.dates}</li>
-                <li className="mb-1 ml-8">Additional Information: {edu.addinfo}</li>
+                <li className="mb-1 ml-8 text-black">Degree: {edu.degree}</li>
+                <li className="mb-1 ml-8 text-black">Dates: {edu.dates}</li>
+                <li className="mb-1 ml-8 text-black">Additional Information: {edu.addinfo}</li>
               </ul>
             </div>
           ))}
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Work Experience</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Work Experience</h2>
           {cvData.workExperience.map((work, index) => (
             <div key={index}>
-              <p className="mb-1 flex items-center font-bold"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
+              <p className="mb-1 flex items-center font-bold text-black"><ToolOutlined className="mr-1"/>Company: {work.company}</p>
               <ul className="list-disc ml-8">
-                <li className="mb-1 ml-8"> Role: {work.role}</li>
-                <li className="mb-1 ml-8"> Dates: {work.role}</li>
-                <li className="mb-1 ml-8"> Job Description: {work.role}</li>
+                <li className="mb-1 ml-8 text-black"> Role: {work.role}</li>
+                <li className="mb-1 ml-8 text-black"> Dates: {work.role}</li>
+                <li className="mb-1 ml-8 text-black"> Job Description: {work.role}</li>
               </ul>
             </div>
           ))}
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Projects</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Projects</h2>
           <div>
             {cvData.projects.map((project, index) => (
               <div key={index}>
-                <p className="mb-1 flex items-center font-bold"><FundProjectionScreenOutlined className="mr-1"/>Project: {project.name}</p>
-                <p className="mb-1 ml-8">Description: {project.description}</p>
+                <p className="mb-1 flex items-center font-bold text-black"><FundProjectionScreenOutlined className="mr-1"/>Project: {project.name}</p>
+                <p className="mb-1 ml-8 text-black">Description: {project.description}</p>
               </div>
             ))}
           </div>
 
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Skills</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Skills</h2>
           <div>
-            <p className="mb-1 flex items-center">
+            <p className="mb-1 flex items-center text-black">
             <SettingOutlined className="mr-1"/>
               {cvData.skills.map((skill, index) => (
                 <React.Fragment key={index}>
@@ -114,11 +114,11 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </p>
           </div>
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Languages</h2>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Languages</h2>
           <div>
             <ul className="list-disc">
               {cvData.languages.map((language, index) => (
-                <li key={index} className="mb-1 flex items-center">
+                <li key={index} className="mb-1 flex items-center text-black">
                   <CommentOutlined className="mr-1"/>
                   {language.language} | {language.level}
                 </li>
@@ -126,12 +126,12 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
             </ul>
           </div>
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Social Media</h2>
-          <p className="mb-1 flex items-center"><GithubOutlined className="mr-1"/>GitHub: {cvData.github}</p>
-          <p className="mb-1 flex items-center"><LinkedinOutlined className="mr-1"/>LinkedIn: {cvData.linkedin}</p>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Social Media</h2>
+          <p className="mb-1 flex items-center text-black"><GithubOutlined className="mr-1"/>GitHub: {cvData.github}</p>
+          <p className="mb-1 flex items-center text-black"><LinkedinOutlined className="mr-1"/>LinkedIn: {cvData.linkedin}</p>
 
-          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4`} style={{ borderColor: selectedColor }}>Interests</h2>
-          <p className="flex items-top"><PaperClipOutlined className="mr-1"/>{cvData.interests}</p>
+          <h2 className={`text-xl font-semibold border-b-2 pb-2 mb-4 mt-4 text-black`} style={{ borderColor: selectedColor }}>Interests</h2>
+          <p className="flex items-top text-black"><PaperClipOutlined className="mr-1"/>{cvData.interests}</p>
         </div>
 
         <div className="flex items-center mb-4">

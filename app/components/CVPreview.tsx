@@ -23,9 +23,12 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
     setSelectedFont(font);
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async () => {
     if (typeof window !== 'undefined') {
-      import('html2pdf.js').then((html2pdf) => {
+      try {
+        const html2pdfModule = await import('html2pdf.js');
+        const html2pdf = html2pdfModule.default;
+  
         const element = cvPreviewRef.current;
         const opt = {
           margin: 10,
@@ -34,17 +37,18 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ cvData }) => {
           html2canvas: { scale: 2, removeContainer: true },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         };
-
+  
         if (element) {
           html2pdf().from(element).set(opt).save();
         }
-      }).catch((error) => {
+      } catch (error) {
         console.error('Failed to load html2pdf.js:', error);
-      });
+      }
     } else {
       console.error('html2pdf.js is not available in the server context.');
     }
   };
+  
 
   const colors = ['blue', 'green', 'gray', 'purple', 'pink'];
   const fonts = ['sans-serif', 'serif', 'monospace', 'cursive', 'fantasy'];
